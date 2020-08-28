@@ -12,7 +12,6 @@ blazars=blazars.reset_index() # start indexing from 0
 blazars=blazars.drop("index" ,True)
 blazars=blazars.sort_values(by =["Catalog_name"])
 
-
 # create df for 10 year catalog(second release
 all_sources_file = pd.read_csv("all_sources.txt")
 all_sources = pd.DataFrame(all_sources_file)
@@ -24,8 +23,12 @@ all_sources=all_sources.loc[all_sources.Catalog_name.isin(blazars.Catalog_name)]
 # create a df where column below were given from 10 years catalog
 for_check= all_sources[["Catalog_name","RA","DEC","PL_index","LP_alpha","LP_beta"]]
 for_check=for_check.reset_index() # start indexing from 0
+
 for_check=for_check.drop("index" ,True)
 for_check=for_check.sort_values(by =["Catalog_name"])
 for_check["Redshift"] =  blazars["Redshift"]
-for_check=for_check.sort_values(by =["Redshift"])
+for_check["Sign."] =blazars["Sign"]
+#for_check=for_check.sort_values(by =["Redshift"])
+for_check=for_check.sort_values(by =["Sign."])
+
 for_check.to_csv("for_check.csv",index=False)
