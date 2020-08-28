@@ -28,7 +28,8 @@ for_check=for_check.drop("index" ,True)
 for_check=for_check.sort_values(by =["Catalog_name"])
 for_check["Redshift"] =  blazars["Redshift"]
 for_check["Sign."] =blazars["Sign"]
+for_check.insert(1,"Assoc_name",blazars["Assoc_name"],True)
 #for_check=for_check.sort_values(by =["Redshift"])
 for_check=for_check.sort_values(by =["Sign."])
-
+print(for_check)
 for_check.to_csv("for_check.csv",index=False)
